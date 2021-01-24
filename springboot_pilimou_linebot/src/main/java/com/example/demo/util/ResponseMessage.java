@@ -2,6 +2,8 @@ package com.example.demo.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,18 +11,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.entity.Message;
-import com.example.demo.entity.Reply;
-import com.example.demo.entity.TextMessages;
+import com.example.demo.entity.linebot.Message;
+import com.example.demo.entity.linebot.Reply;
+import com.example.demo.entity.linebot.TextMessages;
+import com.example.demo.pttgamesale.controller.MainController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ResponseMessage {
 	
-	@Value("${lineBot.callBackEvent}")
-	String callBackEvent;
-
 	@Value("${lineBot.channelToken}")
 	private String channelToken;
 	
@@ -30,6 +30,8 @@ public class ResponseMessage {
 	@Autowired
     Reply reply;
 	
+	@Autowired
+	MainController pttMainController;
 	
 	// Jackson ObjectMapper
     ObjectMapper objectMapper = new ObjectMapper();
@@ -40,10 +42,10 @@ public class ResponseMessage {
 	     headers.add("Content-Type", "application/json");
 	     headers.add("Authorization", "Bearer {" + channelToken + "}");
 	        
-	     if (message.getText().equals(callBackEvent)) {
-	    	 
+	     if (message.getText().equals("NS")) {
+	    	
 	    	 textMessages.setType("text");
-	    	 textMessages.setText("我不想努力了");
+	    	 textMessages.setText("哈哈哈哈哈哈哈");
 	    	 textList.add(textMessages);
 	    	 
 	    	 reply.setReplyToken(replyToken);

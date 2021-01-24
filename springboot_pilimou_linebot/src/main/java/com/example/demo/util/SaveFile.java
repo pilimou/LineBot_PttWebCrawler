@@ -8,15 +8,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class SaveFile {
 	
 	@Value("${pttGameSale.fileDir}")
-	String fileDir;
+	private String fileDir;
 	
 	@Value("${pttGameSale.fileName}")
-	String fileName;
+	private String fileName;
 	
 	public void savePttGameSaleTitle(Map<String,String> map) {
 		Map<String,String> newArticleTitles = map;

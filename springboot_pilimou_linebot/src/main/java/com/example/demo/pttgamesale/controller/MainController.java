@@ -4,22 +4,34 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.pttgamesale.http.HttpClientTest;
 import com.example.demo.util.LoadFile;
 import com.example.demo.util.SaveFile;
 
+@Component
 public class MainController {
 
 	@Value("${pttGameSale.Url}")
 	private String url;
 	
-	@Scheduled(cron = "0 */4 8-23 * * * ?")
-	public void getAddNewTitles() {
-		Map<String, String> newTitles = new HttpClientTest().getHtml(url);
-		Map<String, String> oldTitles = new LoadFile().loadPttGameSaleTitle();
+	@Autowired
+	HttpClientTest httpClientTest;
+	
+	@Autowired
+	LoadFile loadFile;
+	
+	@Autowired
+	SaveFile saveFile;
+	
+	@Scheduled(cron = "0 */6 8-23 * * ?")
+	public Map<String, String> getAddNewTitles() {
+		Map<String, String> newTitles = httpClientTest.getHtml(url);
+		Map<String, String> oldTitles = loadFile.loadPttGameSaleTitle();
 		Map<String, String> addNewTitles = new LinkedHashMap<>();
 		
 		for(Entry<String, String> newEntry : newTitles.entrySet()) {
@@ -35,12 +47,9 @@ public class MainController {
 		}	
 		
 		if(addNewTitles.size() > 0) {
-			new SaveFile().savePttGameSaleTitle(newTitles);
-			System.out.println("新增" + addNewTitles.size() + "筆");
-		}else {
-			System.out.println("新增" + addNewTitles.size() + "筆");
+			saveFile.savePttGameSaleTitle(newTitles);
 		}
-
+		return newTitles;
 	}
 
 }

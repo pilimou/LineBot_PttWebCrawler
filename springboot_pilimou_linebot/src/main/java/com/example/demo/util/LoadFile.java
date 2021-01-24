@@ -9,19 +9,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Component;
+@Component
 public class LoadFile {
 	
 	@Value("${pttGameSale.fileDir}")
-	String fileDir;
+	private String fileDir;
 	
 	@Value("${pttGameSale.fileName}")
-	String fileName;
+	private String fileName;
 	
 	public Map<String, String> loadPttGameSaleTitle() {
 		Map<String, String> oldArticleTitles = new LinkedHashMap<>();
 		File file = new File(fileDir + "/" + fileName);
-		
+		System.out.println(fileDir + "/" + fileName);
 		try {
 			if(!file.exists()) {
 				new File(fileDir).mkdir();
