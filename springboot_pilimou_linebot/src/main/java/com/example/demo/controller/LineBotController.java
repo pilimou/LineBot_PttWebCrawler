@@ -42,12 +42,6 @@ public class LineBotController extends CommonEvent {
 	
 	@Autowired
 	SendMessage sendMessage;
-	
-	@Autowired
-    TextMessages textMessages;
-	
-	@Autowired
-    Reply reply;
 
 	@Autowired
 	VerificationLine verificationLine;
@@ -62,7 +56,7 @@ public class LineBotController extends CommonEvent {
 	public ResponseEntity<String> receiveEvent(@RequestBody String requestBody,
 			@RequestHeader("X-Line-Signature") String line_headers)
 			throws RestClientException, JsonProcessingException {
-		System.out.println(requestBody);
+
 		// ------------------接收驗證------------------
 
 		if (verificationLine.checkFromLine(requestBody, line_headers, channelSecret)) {
@@ -77,7 +71,7 @@ public class LineBotController extends CommonEvent {
 	}
 	
 	
-	
+	//Override message事件
 	@Override
 	public void messageEvent(Events event, String botId) throws RestClientException, JsonProcessingException {
 		super.messageEvent(event, botId);
