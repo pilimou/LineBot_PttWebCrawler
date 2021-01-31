@@ -1,4 +1,4 @@
-package com.example.demo.entity.linebot;
+package com.example.demo.entity.linebotreply;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.example.demo.pttgamesale.controller;
+package com.example.demo.crawler.pttgamesale.controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.pttgamesale.http.HttpClientTest;
-import com.example.demo.util.LoadFile;
-import com.example.demo.util.SaveFile;
+import com.example.demo.crawler.pttgamesale.file.LoadFile;
+import com.example.demo.crawler.pttgamesale.file.SaveFile;
+import com.example.demo.crawler.pttgamesale.html.HttpClientTest;
 
 @Component
-public class MainController {
+public class CrawlerController {
 
-	@Value("${pttGameSale.Url}")
+	@Value("${crawler.pttGameSale.url}")
 	private String url;
 	
 	@Autowired
@@ -28,7 +28,6 @@ public class MainController {
 	@Autowired
 	SaveFile saveFile;
 	
-	@Scheduled(cron = "0 */6 8-23 * * ?")
 	public Map<String, String> getAddNewTitles() {
 		Map<String, String> newTitles = httpClientTest.getHtml(url);
 		Map<String, String> oldTitles = loadFile.loadPttGameSaleTitle();
@@ -48,8 +47,10 @@ public class MainController {
 		
 		if(addNewTitles.size() > 0) {
 			saveFile.savePttGameSaleTitle(newTitles);
+		}else {
+			addNewTitles = null;
 		}
-		return newTitles;
+		return addNewTitles;
 	}
 
 }

@@ -1,2 +1,33 @@
 lineBot:
-  callBackEvent: NS
+  callBackReplyUrl: https://api.line.me/v2/bot/message/reply
+  broadcastUrl: https://api.line.me/v2/bot/message/broadcast
+  giveUp:
+    channelToken: 
+    channelSecret: 
+    callBackEvent: NS
+
+
+
+
+crawler:
+  pttGameSale:
+    url: https://www.ptt.cc/bbs/Gamesale/index.html
+    fileDir: D:/PttGameSaleTitle
+    fileName: title.txt
+
+
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/linebot?useUnicode=yes&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Taipei
+    username: root
+    password: Do!ng123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate: 
+      ddl-auto: update      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      

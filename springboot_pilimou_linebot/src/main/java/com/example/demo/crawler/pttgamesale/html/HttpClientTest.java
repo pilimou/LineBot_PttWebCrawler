@@ -1,4 +1,4 @@
-package com.example.demo.pttgamesale.http;
+package com.example.demo.crawler.pttgamesale.html;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -66,9 +66,12 @@ public class HttpClientTest {
 		Document document = Jsoup.parse(html);
 		
 		Elements postItems = document.getElementsByClass("title");
+		System.out.println(postItems);
 		//key=網址 , value=標題
 		for(Element postItem : postItems) {
-			newArticleTitles.put("https://www.ptt.cc" + postItem.select("a").attr("href"), postItem.text());
+			if(!postItem.select("a").attr("href").equals("")) {
+				newArticleTitles.put("https://www.ptt.cc" + postItem.select("a").attr("href"), postItem.text());
+			}
 		}
 		
 		return newArticleTitles;

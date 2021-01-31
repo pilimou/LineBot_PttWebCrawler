@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.crawler.pttgamesale.file;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoadFile {
 	
-	@Value("${pttGameSale.fileDir}")
+	@Value("${crawler.pttGameSale.fileDir}")
 	private String fileDir;
 	
-	@Value("${pttGameSale.fileName}")
+	@Value("${crawler.pttGameSale.fileName}")
 	private String fileName;
 	
 	public Map<String, String> loadPttGameSaleTitle() {
