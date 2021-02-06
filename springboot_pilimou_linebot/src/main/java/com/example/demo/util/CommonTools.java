@@ -2,6 +2,8 @@ package com.example.demo.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.http.HttpHeaders;
 
@@ -23,4 +25,24 @@ public class CommonTools {
 		return headers;
 	}
 	
+	
+	//比對傳進來的MAP和比對條件字串
+	public String containsString(Map<String, String> newTitles,String[] containsStrs) {
+		
+		String messagesText = "";		
+		
+		int i;
+		for(Entry<String, String> newTitle : newTitles.entrySet()) {
+			i = 0;
+			for (String containsStr : containsStrs) {
+				newTitle.getValue().contains(containsStr);
+				i++;
+			}
+			if(i == containsStrs.length) {
+				messagesText += newTitle.getKey() + "\n" + newTitle.getValue() + "\n";	
+			}
+		}
+		
+		return messagesText;
+	}
 }
