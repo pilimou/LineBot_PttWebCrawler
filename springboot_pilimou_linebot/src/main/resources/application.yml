@@ -2,6 +2,7 @@ lineBot:
   callBackReplyUrl: https://api.line.me/v2/bot/message/reply
   broadcastUrl: https://api.line.me/v2/bot/message/broadcast
   giveUp:
+    keyWord: [NS,機,售]
     channelToken: 
     channelSecret: 
     callBackEvent: NS
