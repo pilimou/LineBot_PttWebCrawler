@@ -38,39 +38,41 @@ public class CommonEvent {
 		}
 
 		String eventType = null;
-
-		if (event.getType() != null) {
-
-			eventType = event.getType();
-
-			// 被加好友時
-			if (eventType.equals("follow"))
-				followEvent(event, botId);
-
-			// 被封鎖時
-			if (eventType.equals("unfollow"))
-				unFollowEvent(event, botId);
-
-			// message
-			if (eventType.equals("message"))
-				messageEvent(event, botId);
-
-			// 機器人被加入群組/聊天室
-			if (eventType.equals("join"))
-				joinEvent(event, botId);
-
-			// 機器人已離開群組/聊天室
-			if (eventType.equals("leave"))
-				leaveEvent(event, botId);
-
-			// 使用者加入群組/聊天室
-			if (eventType.equals("memberJoined"))
-				memberJoinedEvent(event, botId);
-
-			// 使用者離開群組/聊天室
-			if (eventType.equals("memberLeft"))
-				memberLeftEvent(event, botId);
-
+		if (event != null) {
+			
+			if (event.getType() != null) {
+				
+				eventType = event.getType();
+				
+				// 被加好友時
+				if (eventType.equals("follow"))
+					followEvent(event, botId);
+				
+				// 被封鎖時
+				if (eventType.equals("unfollow"))
+					unFollowEvent(event, botId);
+				
+				// message
+				if (eventType.equals("message"))
+					messageEvent(event, botId);
+				
+				// 機器人被加入群組/聊天室
+				if (eventType.equals("join"))
+					joinEvent(event, botId);
+				
+				// 機器人已離開群組/聊天室
+				if (eventType.equals("leave"))
+					leaveEvent(event, botId);
+				
+				// 使用者加入群組/聊天室
+				if (eventType.equals("memberJoined"))
+					memberJoinedEvent(event, botId);
+				
+				// 使用者離開群組/聊天室
+				if (eventType.equals("memberLeft"))
+					memberLeftEvent(event, botId);
+				
+			}
 		}
 	}
 

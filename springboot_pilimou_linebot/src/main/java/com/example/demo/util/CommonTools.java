@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CommonTools {
 	
 	//轉時間格式
@@ -30,17 +32,19 @@ public class CommonTools {
 	public String containsString(Map<String, String> newTitles,String[] containsStrs) {
 		
 		String messagesText = "";		
-		
-		int i;
-		for(Entry<String, String> newTitle : newTitles.entrySet()) {
-			i = 0;
-			for (String containsStr : containsStrs) {
-				newTitle.getValue().contains(containsStr);
-				i++;
-			}
-			if(i == containsStrs.length) {
-				messagesText += newTitle.getKey() + "\n" + newTitle.getValue() + "\n";	
-			}
+		if (newTitles != null)  {
+			int i;
+			for(Entry<String, String> newTitle : newTitles.entrySet()) {
+				i = 0;
+				for (String containsStr : containsStrs) {
+					if (newTitle.getValue().contains(containsStr)) {
+						i++;						
+					}
+				}
+				if(i == containsStrs.length) {
+					messagesText += newTitle.getKey() + "\n" + newTitle.getValue() + "\n";	
+				}
+			}		
 		}
 		
 		return messagesText;

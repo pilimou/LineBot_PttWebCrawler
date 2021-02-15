@@ -54,7 +54,7 @@ public class LineBotController extends CommonEvent {
 	public ResponseEntity<String> receiveEvent(@RequestBody String requestBody,
 			@RequestHeader("X-Line-Signature") String line_headers)
 			throws RestClientException, JsonProcessingException {
-
+		System.out.println(requestBody);
 		// ------------------接收驗證------------------
 
 		if (verificationLine.checkFromLine(requestBody, line_headers, channelSecret)) {
@@ -85,7 +85,7 @@ public class LineBotController extends CommonEvent {
 
 
 	//廣播排程
-	@Scheduled(cron = "0 */12 * * * ?")
+	@Scheduled(cron = "0 */20 * * * ?")
 	public void getNewArticle() throws RestClientException, JsonProcessingException {
 		String messagesText = commonTools.containsString(pttGameSale.getAddNewTitles(), keyWord);
 		if (messagesText.length() > 0) {

@@ -66,7 +66,7 @@ public class HttpClientTest {
 		Document document = Jsoup.parse(html);
 		
 		Elements postItems = document.getElementsByClass("title");
-		System.out.println(postItems);
+
 		//key=網址 , value=標題
 		for(Element postItem : postItems) {
 			if(!postItem.select("a").attr("href").equals("")) {

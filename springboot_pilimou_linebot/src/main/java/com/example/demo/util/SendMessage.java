@@ -36,9 +36,6 @@ public class SendMessage {
 	Reply reply;
 
 	@Autowired
-	RestTemplate restTemplate;
-
-	@Autowired
 	CommonTools commonTools;
 
 	ObjectMapper objectMapper = new ObjectMapper();
@@ -46,7 +43,7 @@ public class SendMessage {
 	// 全體廣播
 	public void broadcastMessage(String messageType, String message, String channelAccessToken)
 			throws RestClientException, JsonProcessingException {
-
+		RestTemplate restTemplate = new RestTemplate();
 		if (messageType.equals("text")) {
 			messages.setMessages(replyMessageText(messageType, message));
 		}
@@ -58,7 +55,7 @@ public class SendMessage {
 	// 回覆
 	public void replyMessage(String messageType, String message, String channelAccessToken, String replyToken)
 			throws RestClientException, JsonProcessingException {
-
+		RestTemplate restTemplate = new RestTemplate();
 		if (messageType.equals("text")) {
 			reply.setMessages(replyMessageText(messageType, message));
 		}
